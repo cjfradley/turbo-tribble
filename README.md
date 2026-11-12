@@ -1,0 +1,1 @@
+[See src/README](/src/README.md) for detailed instructions on how to setup, test, develop or build the app
