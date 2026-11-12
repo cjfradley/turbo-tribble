@@ -16,7 +16,7 @@ Requirements and design: [`../docs/requirements.md`](../docs/requirements.md),
 ## Getting started
 
 ```sh
-cp .env.example .env.local   # fill in tenant, client ID, storage account, container
+cp .env.example .env.local   # fill in tenant, client ID, storage account, container ONLY IF REAL TENANT EXISTS AND IS USED FOR DEVELOPMENT. Otherwise use MOCK setup for further development or testing
 npm install
 npm run dev                  # http://localhost:5173
 ```
