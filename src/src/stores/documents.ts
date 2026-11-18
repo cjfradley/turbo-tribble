@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { findByTags, listDocuments, type DocumentItem } from '@/services/storage'
 import { normaliseSearchText } from '@/utils/fileName'
@@ -33,6 +33,13 @@ export const useDocumentsStore = defineStore('documents', () => {
     tagMatches.value = tags.length ? await findByTags(tags) : null
   }
 
+  /** Adds or replaces one document, e.g. after an upload, without re-listing the container. */
+  function upsert(item: DocumentItem): void {
+    const index = items.value.findIndex((existing) => existing.name === item.name)
+    if (index === -1) items.value.push(item)
+    else items.value[index] = item
+  }
+
   const allTags = computed(() => [...new Set(items.value.flatMap((item) => item.tags))].sort())
 
   const filtered = computed(() => {
@@ -40,7 +47,7 @@ export const useDocumentsStore = defineStore('documents', () => {
     return items.value.filter((item) => {
       if (tagMatches.value && !tagMatches.value.has(item.name)) return false
       if (!text) return true
-      return item.name.startsWith(text) || item.tags.some((tag) => tag.startsWith(text))
+      return item.name.includes(text) || item.tags.some((tag) => tag.includes(text))
     })
   })
 
@@ -53,6 +60,10 @@ export const useDocumentsStore = defineStore('documents', () => {
     allTags,
     filtered,
     load,
+    upsert,
     setSelectedTags,
   }
 })
+
+// Without this, a hot reload keeps the old store instance (and its old functions).
+if (import.meta.hot) import.meta.hot.accept(acceptHMRUpdate(useDocumentsStore, import.meta.hot))

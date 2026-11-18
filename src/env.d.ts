@@ -13,6 +13,10 @@ interface ImportMetaEnv {
   readonly VITE_APP_URL: string
   /** Name of the Entra app role that marks admins. Defaults to DocLibrary.Admin. */
   readonly VITE_ADMIN_ROLE?: string
+  /** Largest file users may upload, in MB (FR-3.6). Defaults to 100. */
+  readonly VITE_MAX_FILE_MB?: string
+  /** Allowed file types, like the `accept` attribute: ".pdf,.docx,image/*". Empty allows all (FR-3.6). */
+  readonly VITE_ALLOWED_TYPES?: string
   /** "true" runs the dev server with fake sign-in, storage and Teams (src/mocks/). */
   readonly VITE_MOCK?: string
 }

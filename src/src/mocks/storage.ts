@@ -175,6 +175,9 @@ export async function uploadDocument(file: File, options: UploadOptions): Promis
   // Simulated upload progress in 5 steps.
   for (let step = 1; step <= 5; step++) {
     await delay(150)
+    if (options.abortSignal?.aborted) {
+      throw new DOMException('The upload was cancelled.', 'AbortError')
+    }
     options.onProgress?.(Math.round((file.size * step) / 5))
   }
 

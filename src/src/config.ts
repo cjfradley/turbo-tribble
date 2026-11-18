@@ -19,6 +19,11 @@ export const config = {
   container: required('VITE_CONTAINER', 'documents'),
   appUrl: required('VITE_APP_URL', window.location.origin).replace(/\/$/, ''),
   adminRole: import.meta.env.VITE_ADMIN_ROLE || 'DocLibrary.Admin',
+  /** Upload limits (FR-3.6). The values are still TBD, so they're set per environment. */
+  upload: {
+    maxBytes: Number(import.meta.env.VITE_MAX_FILE_MB || 100) * 1024 ** 2,
+    accept: import.meta.env.VITE_ALLOWED_TYPES || '',
+  },
 } as const
 
 /** Delegated scopes. Storage and Graph are separate resources, so tokens are requested separately. */

@@ -13,5 +13,8 @@ import '@fluentui/web-components/message-bar.js'
 import '@fluentui/web-components/badge.js'
 import '@fluentui/web-components/avatar.js'
 import '@fluentui/web-components/divider.js'
+import '@fluentui/web-components/dialog.js'
+import '@fluentui/web-components/dialog-body.js'
+import '@fluentui/web-components/progress-bar.js'
 
 setTheme(webLightTheme)

@@ -95,6 +95,7 @@ export async function uploadDocument(file: File, options: UploadOptions): Promis
       },
       conditions: options.overwrite ? undefined : { ifNoneMatch: '*' },
       onProgress: (progress) => options.onProgress?.(progress.loadedBytes),
+      abortSignal: options.abortSignal,
     })
   } catch (error) {
     if (error instanceof RestError && (error.statusCode === 409 || error.statusCode === 412)) {

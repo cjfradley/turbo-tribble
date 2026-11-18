@@ -99,7 +99,7 @@ await container.getBlockBlobClient(blobName).uploadData(file, {
 });
 ```
 
-Search text goes through the same `normalise()` before it's used as the listing prefix, so name search is case-insensitive. The list, the download and the Teams message use the decoded `originalName`. The deep link (FR-2.6) uses the blob name.
+Search text goes through the same `normalise()` and is matched against any part of the blob name in the already-loaded list, so name search is case-insensitive. The list, the download and the Teams message use the decoded `originalName`. The deep link (FR-2.6) uses the blob name.
 
 **Tag storage:** index tags are key/value pairs, but this app's tags are plain labels. Store each label as the key, with a fixed value: `{ "invoice": "1", "q3": "1" }`. Normalise labels to lower case before saving (FR-4.5), because tag keys and values are case-sensitive.
 

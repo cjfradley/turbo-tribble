@@ -24,6 +24,8 @@ export interface UploadOptions {
   /** Replace an existing file with the same normalised name (FR-3.5). */
   overwrite?: boolean
   onProgress?: (loadedBytes: number) => void
+  /** Cancels the upload; the call then rejects with an AbortError. */
+  abortSignal?: AbortSignal
 }
 
 export class FileExistsError extends Error {

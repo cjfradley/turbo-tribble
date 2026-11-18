@@ -4,9 +4,11 @@ import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useDocumentsStore } from '@/stores/documents'
 import { downloadDocument, type DocumentItem } from '@/services/storage'
+import UploadPanel from '@/components/UploadPanel.vue'
+import { formatSize } from '@/utils/format'
 
 /**
- * Files list with search. Upload, tag editing, delete and the Teams picker
+ * Files list with search and upload. Tag editing, delete and the Teams picker
  * are separate components still to be built (see docs/requirements.md, section 4).
  */
 const store = useDocumentsStore()
@@ -32,13 +34,6 @@ function onSearchInput(event: Event) {
   searchText.value = (event.target as HTMLInputElement).value
 }
 
-const sizeFormat = new Intl.NumberFormat(undefined, { maximumFractionDigits: 1 })
-function formatSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`
-  if (bytes < 1024 ** 2) return `${sizeFormat.format(bytes / 1024)} KB`
-  return `${sizeFormat.format(bytes / 1024 ** 2)} MB`
-}
-
 function onDownload(item: DocumentItem) {
   void downloadDocument(item)
 }
@@ -48,6 +43,8 @@ onMounted(() => store.load())
 
 <template>
   <section class="files">
+    <UploadPanel />
+
     <div class="toolbar">
       <fluent-field label-position="above">
         <label slot="label" for="search">Search by file name or tag</label>

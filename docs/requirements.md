@@ -88,7 +88,7 @@ In Phase 1 the app role only controls what the UI shows. What a user can actuall
 
 ### 4.5 Search
 - **FR-5.1** A single search box matches against file names and tags.
-- **FR-5.2** File name search matches the start of the name (blob prefix listing) and also filters the already-loaded list on the client. The search text is normalised the same way as file names (FR-3.7), so the search is case-insensitive.
+- **FR-5.2** File name search matches any part of the name, filtering the already-loaded list on the client. The search text is normalised the same way as file names (FR-3.7), so the search is case-insensitive.
 - **FR-5.3** Tag search uses the Blob Index `Find Blobs by Tags` API.
 - **FR-5.4** Users can filter by one or more tags (tag chips or facets).
 - **FR-5.5** Results update as the user types (debounced).
